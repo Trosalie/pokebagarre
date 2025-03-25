@@ -5,6 +5,7 @@ import com.montaury.pokebagarre.erreurs.ErreurPokemonNonRenseigne;
 import com.montaury.pokebagarre.webapi.PokeBuildApi;
 import java.util.concurrent.CompletableFuture;
 
+
 public class Bagarre {
   public final PokeBuildApi webApi;
 
@@ -23,7 +24,7 @@ public class Bagarre {
       .thenCombine(webApi.recupererParNom(nomSecondPokemon), Bagarre::determinerVainqueur);
   }
 
-  private void validerNomPokemons(String nomPremierPokemon, String nomSecondPokemon) {
+  public void validerNomPokemons(String nomPremierPokemon, String nomSecondPokemon) {
     if (estVide(nomPremierPokemon)) {
       throw new ErreurPokemonNonRenseigne("premier");
     }
@@ -39,7 +40,7 @@ public class Bagarre {
     return nomPokemon == null || nomPokemon.trim().isEmpty();
   }
 
-  private static Pokemon determinerVainqueur(Pokemon premierPokemon, Pokemon secondPokemon) {
+  public static Pokemon determinerVainqueur(Pokemon premierPokemon, Pokemon secondPokemon) {
     return premierPokemon.estVainqueurContre(secondPokemon) ? premierPokemon : secondPokemon;
   }
 
